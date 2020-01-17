@@ -108,6 +108,8 @@ router.post('/signin', (req, res) => {
 
 /*
     GET CURRENT USER INFO GET /api/account/getInfo
+    세션확인이: 클라이언트에서 로그인 시, 로그인 데이터를 쿠키에 담고 사용을 하고 있다가,
+    만약에 새로고침을 해서 어플리케이션을 처음부터 다시 렌더링 하게 될 때, 지금 갖고 있는 쿠키가 유효한건지 체크를
 */
 router.get('/getinfo', (req, res) => {
     if(typeof req.session.loginInfo === "undefined") {
@@ -124,6 +126,7 @@ router.get('/getinfo', (req, res) => {
 */
 router.post('/logout', (req, res) => {
     req.session.destroy(err => { if(err) throw err; });
+    // 세션을 파괴
     return res.json({ sucess: true });
 });
 
